@@ -1,4 +1,3 @@
-
 import numpy as np
 import pandas as pd
 import pickle
@@ -143,7 +142,7 @@ class AMRDataGenerator(object):
         keys = [z[0] for z in cur.description]
         for row in cur:
             d = dict(zip(keys,row))
-            print 'NAME:', d['name']
+            #print 'NAME:', d['name']
             if not d['name'] in features:
                 features[d['name']] = {}
             features[d['name']].update(d)
@@ -585,7 +584,7 @@ class AttrGenerator(AMRDataGenerator):
             
             df = pd.DataFrame(d)
             df= df[ self.featureOrder + ['target'] ]
-            print df
+            #print df
             
             if vcount > 20:
                 return

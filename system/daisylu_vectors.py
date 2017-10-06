@@ -1,4 +1,54 @@
+# 12/9/16, made this AMR specific, eliminating the need to parse srl vectors.
+#
+# DaisyLu Vectors  10/8/2015
+#
+# Read in the original conll format files and the list of items represented by each feature.
+# Create MySQLite database with everything necessary to generate vectors for specific models,
+# in Lua, including:
+#    Word, Pred, PredContext(3), marker(3)  <-- first task, check with LUA generated SQLITE db which
+#                                               will have differing indices for odd words, but not enough
+#                                               to matter - ?  Then check the time for LUA vector creation
+#                                               (should more processing be done here to speed up LUA?)x
+#    Word, Pred, PredContext(5), marker(5) 
+#    Word, Pred, PredContext-Pred(5), marker(5) 
+#    Word, Pred, PredContext-Pred(5), Position, Caps, Suffix 
+#    Word, Pred, PredContext-Pred(5), Position, Caps, Suffix, patch, deprel, POS, PPOS
+#        
+#
+# Will extend this to new word reps, and to AMR feature generation, so be ready.  
+
+#
+# Similar to SRLDepPaper.py:  
+# --------------------------
+#
+# It reads in CONLL format and generates a new CONLL format that includes path information 
+#
+# It generates a word list for random training that will only contain words from the training
+# dataset, with a fraction removed in order to train the UNKNOWN vector.  This prevents using
+# untrained, random words during testing.  
+#
+# It can be used to read in CONLL result files from the original contest, or from Daisy, and can 
+# calculate the F1 score for them.
+#
+# It can separate the sense and role scores in many ways since the raw comparison data is stored
+# in internal data structures.  It can rank systems by role and sense scores.
+#
+# It can read in the output from the official conll2009 perl script so that F1 can be compared.
+#
+# It can generate Latex tables of the results - PANDAS is better for this, though.
+# 
+# For the sense calculation, it evaluates senses for verbs and creates the list of preds that
+# should be tested (versus preds that have the same value always in the test set)
+#
+# can create heatmaps, and plots of results for various feature combinations, used to generate
+# comparative plots in dependency paper.
+#
+#
+
 import sys
+##reload(sys)
+##sys.setdefaultencoding('utf-8')
+
 import operator
 import re
 from pprint import pprint
@@ -1418,7 +1468,7 @@ def getComparisonDFrames(dbfn, dbrfn, pVector2d=False):
     df, features, genArch = readAMRVectorDatabase(dbfn)
     targetTokenType = genArch['target']
     
-    dfr = readAMRResultsDatabase(dbrfn)    # < is this really just for AMRL0? better name is 'readAMRResultsDatabase'
+    dfr = readAMRResultsDatabase(dbrfn)    
         
     result = pd.merge(df, dfr, on='ix')
     #
@@ -1436,13 +1486,6 @@ def getComparisonDFrames(dbfn, dbrfn, pVector2d=False):
         wstring = c_row['words']
         wi = wstring.split(',')
         wordTokens = [features['words']['tokens'][int(i)-1] for i in wi]
-        print sentIX, pWordIX, wordTokens
-        """
-        wt = c_row['wordTokens']
-        wt = re.sub(',,,',',COMMA,',wt)
-        wordTokens = wt.split(',')
-        wordtokens = [w.strip() for w in wordTokens]
-        """        
         tv = intCSVToList(c_row['targetCSV'])
         rv = intCSVToList(c_row['resultVector'])
         
@@ -1483,7 +1526,7 @@ def plotHeatmaps(tp, genArch=None):
     x = tp.groupby([ 'target', 'result'   ], as_index=False ).count()
     tList = tp[ tp['target'] != tp['result']].groupby( ['target'], as_index=False).count().sort(['sentIX'], ascending=[0])['target'].tolist()
     x = x[ x['target'].isin(tList[1:11])  ]
-    print x.sort(['target','sentIX'], ascending=[1,0])
+    #print x.sort(['target','sentIX'], ascending=[1,0])
     x = x.pivot("result", "target", "wordIX")
 
     title = 'Top 10, excluding O, most confused Target Tags'
@@ -1502,7 +1545,7 @@ def plotHeatmaps(tp, genArch=None):
     x = tp.groupby([ 'target', 'result'   ], as_index=False ).count()
     tList = tp[ tp['target'] != tp['result']].groupby( ['target'], as_index=False).count().sort(['sentIX'], ascending=[0])['target'].tolist()
     x = x[ x['target'].isin(tList[:10])  ]
-    print x.sort(['target','sentIX'], ascending=[1,0])
+    #print x.sort(['target','sentIX'], ascending=[1,0])
     x = x.pivot("result", "target", "wordIX")
 
     title = 'Top 10 most confused Target Tags'

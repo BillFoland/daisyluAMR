@@ -344,90 +344,72 @@ def alignedInputDryrunFlow(amrSents, outFn,  sessionTag,
 
 
 if __name__ == '__main__':
-       
-    """
-    ../networks /Users/bill_foland/anaconda/bin/python  AMR_NN_Forward.py  -v ../data/AMRL0_tmp_testVectors.db -m ./models/0528-0322.sgmodel -w ./models/0528-0322-epoch137-f10.8471.sgweights -r ../results/AMRL0_tmp_results.db -s test
-    """
+
+    desc = """
+       python daisylu_main.py
+           """
+    parser = argparse.ArgumentParser(description=desc)
+    parser.add_argument('-a','--aligned',              help='aligned input',                    action='store_true', default=True)
     
+    parser.add_argument('-i','--infile',               help='input file name',                  required=False, default='TINY_amr-bank-struct-v1.6-test.txt')
+    parser.add_argument('-o','--outfile',              help='output file name',                 required=False, default='TINY_amr-bank-struct-v1.6-test.amr')
+    parser.add_argument('-g','--goldfile',             help='gold file name',                   required=False, default='TINY_amr-bank-struct-v1.6-test')
+    parser.add_argument('-t','--tag',                  help='results and temp file tag',        required=False, default='tmp_')
+    parser.add_argument('-m','--modelString',          help='modelString, like REFERENCE_MODELS',         required=False, default='REFERENCE_MODELS')
+    parser.add_argument('-pid','--pid',                help='pid for AWS',                      required=False, default=-1,  type=int)
     
+    parser.add_argument('-nct','--noConceptThreshold', help='no Concept Threshold prob',        required=False, default=0.65, type=float)
+    parser.add_argument('-sgt','--subGroupThreshold',  help='sub Group Threshold prob',         required=False, default=0.55, type=float)
+
+    parser.add_argument('-smatch2','--smatch2',         help='smatch2 conversion',              action='store_true', default=True )
+    
+    args = vars(parser.parse_args())
+    pprint (args)
+      
     WordRepsFileLocations.init('../data/WORD_LIST.txt')
 
     pd.set_option('display.width',    1000)
     pd.set_option('display.max_rows', 2000)
 
-       
-    if (True): # AMR Parser
-        prefix        = 'LDC15_G300ML' 
-        
-        if (True): # logprob sourced Args   65.89 !!!!
-            useDistSG=True
-            mi = {}
-            mi['AMRL0NoNER']  = { 'id': 0,    'db': 'None' }
-            mi['AMRL0']       = { 'id': './models/SG.model@./models/SG.weights'         , 'db': 'LDC15_G300ML_Concepts.db' } 
-            mi['AMRL0Args']   = { 'id': './models/Args.model@./models/Args.weights'     , 'db': 'LDC15_G300ML_SG_prob_Args.db' } 
-            mi['AMRL0Nargs']  = { 'id': './models/Nargs.model@./models/Nargs.weights'   , 'db': 'LDC15_G300ML_SG_prob_Nargs.db' }
-            mi['AMRL0Attr']   = { 'id': './models/Attr.model@./models/Attr.weights'     , 'db': 'LDC15_G300ML_SG_prob_Attr.db' } 
-            mi['AMRL0Ncat']   = { 'id': './models/Ncat.model@./models/Ncat.weights'     , 'db': 'LDC15_G300ML_SG_prob_Cat.db' } 
+    useDistSG=True
+    mi = {}
+    mi['AMRL0NoNER']  = { 'id': 0,    'db': 'None' }
+    mi['AMRL0']       = { 'id': './models/SG.model@./models/SG.weights'         , 'db': 'LDC15_G300ML_Concepts.db' } 
+    mi['AMRL0Args']   = { 'id': './models/Args.model@./models/Args.weights'     , 'db': 'LDC15_G300ML_SG_prob_Args.db' } 
+    mi['AMRL0Nargs']  = { 'id': './models/Nargs.model@./models/Nargs.weights'   , 'db': 'LDC15_G300ML_SG_prob_Nargs.db' }
+    mi['AMRL0Attr']   = { 'id': './models/Attr.model@./models/Attr.weights'     , 'db': 'LDC15_G300ML_SG_prob_Attr.db' } 
+    mi['AMRL0Ncat']   = { 'id': './models/Ncat.model@./models/Ncat.weights'     , 'db': 'LDC15_G300ML_SG_prob_Cat.db' } 
+    modelInfoDict = {'REFERENCE_MODELS': mi}
+                
+    outfile1 = args['outfile']
+    outfile2 = 'corrected-' + outfile1
+    sList={}
+      
+    sList['test'], _ = readAllAMR(args['infile'])
+    sents = alignedInputDryrunFlow(sList, outfile1, 
+                           args['tag'], 
+                           useNER=True, 
+                           modelInfo = modelInfoDict[args['modelString']],
+                           conceptRejectionThreshold=0.20,   # <------------------------ New
+                           NoConceptThreshold=args['noConceptThreshold'],
+                           forceSubGroupConnectionThreshold=args['subGroupThreshold'],    
+                           NEWPrediction=True,
+                           useDistSG=useDistSG   )
 
+    forceICorefs(sents)
+    removeQuantHMMAttrs(sents)
+    translateCountryCat(sents)
+
+    createOutputTextFile(sents, outfile2, modelInfo=modelInfoDict[args['modelString']], forceSubGroupConnectionThreshold=args['subGroupThreshold'] )
+
+    if args['goldfile']:
+        cmd = getSystemPath('smatchCommand') + ' -r 25 -f %s %s' % ( args['goldfile'], outfile2)
+        print cmd
+        res = subprocess.check_output(cmd, shell=True)        
+        print 'result is ',   res
             
-            modelInfoDict = {'THISMODELSTRING': mi}
-        # 5a) test DAMR sourced AMR generation
-        if (True):
-            args = {'aligned':            True,
-                    'modelString':        'THISMODELSTRING', 
-                    
-                    #'goldfile':           'gold_edited', 
-                    #'infile':             'gold_sentences.txt', 
-                    #'outfile':            'gold_edited.amr',
-                    
-                    'goldfile':           'TINY_amr-bank-struct-v1.6-test', 
-                    'infile':             'TINY_amr-bank-struct-v1.6-test.txt', 
-                    'outfile':            'TINY_amr-bank-struct-v1.6-test.amr',
-                    
-                    'tag':                'tmp_', 
-                    'noConceptThreshold':  0.65, 
-                    'subGroupThreshold':   0.55,
-                    'pid':                 -1
-                    }      
-                    
-            if args['pid'] > -1:
-                outfile2 = str(args['pid']) + '-corrected-' + args['outfile']
-                outfile1 = str(args['pid']) + '-' + args['outfile']
-            else:
-                outfile2 = 'corrected-' + args['outfile']
-                outfile1 = args['outfile']
-            sList={}
-            
-            
-            sList['test'], _ = readAllAMR(args['infile'])
-            sents = alignedInputDryrunFlow(sList, outfile1, 
-                                   args['tag'], 
-                                   useNER=True, 
-                                   modelInfo = modelInfoDict[args['modelString']],
-                                   conceptRejectionThreshold=0.20,   # <------------------------ New
-                                   NoConceptThreshold=args['noConceptThreshold'],
-                                   forceSubGroupConnectionThreshold=args['subGroupThreshold'],    
-                                   NEWPrediction=True,
-                                   useDistSG=useDistSG   )
-    
-            
-            forceICorefs(sents)
-            removeQuantHMMAttrs(sents)
-            translateCountryCat(sents)
-            
-            createOutputTextFile(sents, outfile2, modelInfo=modelInfoDict[args['modelString']], forceSubGroupConnectionThreshold=args['subGroupThreshold'] )
-    
-            if args['goldfile']:
-               cmd = 'python ../../smatch_2.0/smatch.py -r 25 -f %s %s' % ( args['goldfile'], outfile2)
-               print cmd
-               res = subprocess.check_output(cmd, shell=True)        
-               print 'result is ',   res
-                    
-    
-    
-    
-            print 'Done'    
-            exit(1)
+    print 'Done'    
+    exit(1)
 
  
         

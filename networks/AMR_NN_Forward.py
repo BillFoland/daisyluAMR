@@ -61,7 +61,7 @@ s = []
 for arg in vars(args):
      s.append( '%-20s = %-20s      %-20s ' % (arg,  getattr(args, arg), '(' + str(type(getattr(args, arg))) + ')' ) )
 s.sort()
-print '\n'.join(s)
+#print '\n'.join(s)
 
 
 if (args.gpuMem < 0.01):
