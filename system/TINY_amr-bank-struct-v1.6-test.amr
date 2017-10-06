@@ -1,0 +1,96 @@
+# Daisylu end to end output 8/8/16
+
+# ::id lpp_1943.148
+# ::snt But that did not really surprise me much .
+# ::tok But that did not really surprise me much .
+(n1.0 / contrast-01 
+	:ARG2 (n1.5 / surprise-01 :polarity - 
+		:ARG0 (n1.1 / that  )
+		:mod (n1.4 / really  )
+		:degree (n1.7 / much  )
+		:ARG1 (n1.6 / i  ) ) )
+
+# ::id lpp_1943.150
+# ::snt When an astronomer discovers one of these he does not give it a name , but only a number .
+# ::tok When an astronomer discovers one of these he does not give it a name , but only a number .
+(n1.15 / contrast-01 
+	:ARG2 (n1.18 / number 
+		:mod (n1.16 / only  ) )
+	:ARG1 (n1.3 / discover-01 
+		:ARG0-of (n1.10 / give-01 :polarity - 
+			:ARG1 (n1.13 / name  ) )
+		:ARG0 (n1.2 / have-org-role-91 
+			:ARG2 (n1.2_c / astronomer  ) )
+		:mod (n1.6 / this  ) ) )
+
+# ::id lpp_1943.153
+# ::snt This asteroid has only once been seen through the telescope .
+# ::tok This asteroid has only once been seen through the telescope .
+(n1.6 / see-01 
+	:ARG1 (n1.1 / asteroid 
+		:mod (n1.0 / this  ) )
+	:ARG2 (n1.9 / telescope  )
+	:time (n1.4 / once 
+		:mod (n1.3 / only  ) ) )
+
+# ::id lpp_1943.156
+# ::snt But he was in Turkish costume , and so nobody would believe what he said .
+# ::tok But he was in Turkish costume , and so nobody would believe what he said .
+(n1.7 / and 
+	:op2 (n1.11 / believe-01 
+		:ARG0 (n1.9 / nobody  )
+		:ARG1-of (n1.8 / cause-01  )
+		:ARG1 (n1.12 / amr-unknown 
+			:ARG1-of (n1.14 / say-01 
+				:ARG0 (n1.1 / he 
+					:ARG0-of (n1.5 / costume-01 
+						:mod (n1.4 / country :wiki "Turkish_language" 
+							:name (n1.4_c / name :op1 turkish  ) ) ) ) ) )
+		:ARG2-of (n1.0 / contrast-01  ) ) )
+
+# ::id lpp_1943.160
+# ::snt And this time everybody accepted his report .
+# ::tok And this time everybody accepted his report .
+(n1.0 / and 
+	:op2 (n1.4 / accept-01 
+		:ARG0 (n1.3 / everybody  )
+		:time (n1.2 / time 
+			:mod (n1.1 / this  ) )
+		:ARG1 (n1.6 / report-01 
+			:ARG1 (n1.6_c / thing 
+				:poss (n1.5 / he  ) ) ) ) )
+
+# ::id lpp_1943.162
+# ::snt WHen you tell them that you have made a new friend , they never ask you any questions about essential matters .
+# ::tok WHen you tell them that you have made a new friend , they never ask you any questions about essential matters .
+(n1.14 / ask-02 
+	:time (n1.13 / ever  )
+	:time (n1.2 / tell-01 
+		:ARG2 (n1.3 / they  )
+		:ARG1 (n1.7 / make-01 
+			:ARG2 (n1.7_c / person 
+				:ARG0-of (n1.10 / have-rel-role-91 
+					:ARG2 (n1.10_c / friend 
+						:mod (n1.9 / new  ) ) ) ) ) )
+	:ARG1 (n1.17 / question-01 
+		:ARG1 (n1.20 / matter 
+			:mod (n1.19 / essential  ) )
+		:mod (n1.16 / any  ) ) )
+
+# ::id lpp_1943.164
+# ::snt What games does he love best ?
+# ::tok What games does he love best ?
+(n1.4 / love-01 
+	:ARG0 (n1.3 / he  )
+	:ARG1 (n1.5 / good 
+		:domain (n1.1 / game 
+			:mod (n1.0 / amr-unknown  ) )
+		:degree (n1.5_c / most  ) ) )
+
+# ::id lpp_1943.165
+# ::snt Does he collect butterflies ? "
+# ::tok Does he collect butterflies ? "
+(n1.2 / collect-01 
+	:ARG0 (n1.1 / he  )
+	:ARG1 (n1.3 / butterfly  ) )
+

@@ -1,0 +1,117 @@
+# samples from https://amr.isi.edu/download/amr-bank-struct-v1.6.txt: AMR release; corpus: lpp; section: test; number of AMRs: 143 (generated on Fri Mar 4, 2016 at 21:03:52)
+
+# ::id lpp_1943.148 ::date 2012-07-31T11:26:53 ::annotator ISI-AMR-05 ::preferred
+# ::snt But that did not really surprise me much .
+# ::zh 这倒并没有使我感到太奇怪。
+# ::save-date Tue Oct 6, 2015 ::file lpp_1943_148.txt
+(c / contrast-01
+      :ARG2 (s / surprise-01 :polarity -
+            :ARG0 (t / that)
+            :ARG1 (i / i)
+            :degree (m / much)
+            :ARG1-of (r / real-04)))
+
+
+# ::id lpp_1943.150 ::date 2012-07-31T11:42:19 ::annotator ISI-AMR-05 ::preferred
+# ::snt When an astronomer discovers one of these he does not give it a name , but only a number .
+# ::zh 当一个天文学者发现了其中一个星星，他就给它编上一个号码，
+# ::save-date Tue Jun 3, 2014 ::file lpp_1943_150.txt
+(g / give-01
+      :ARG0 (a / astronomer)
+      :ARG1 (n2 / number)
+      :ARG2 (t / thing :quant 1
+            :ARG1-of (i / include-91
+                  :ARG2 (t2 / this)))
+      :mod (o2 / only)
+      :time (d / discover-01
+            :ARG0 a
+            :ARG1 t)
+      :ARG1-of (i2 / instead-of-91
+            :ARG2 (n3 / name-01
+                  :ARG0 a
+                  :ARG1 t)))
+
+# ::id lpp_1943.153 ::date 2012-07-31T11:50:14 ::annotator ISI-AMR-05 ::preferred
+# ::snt This asteroid has only once been seen through the telescope .
+# ::zh 这颗小行星仅仅被用望远镜看见过一次。
+# ::save-date Mon Sep 16, 2013 ::file lpp_1943_153.txt
+(s / see-01
+      :ARG1 (a / asteroid
+            :mod (t / this))
+      :instrument (t2 / telescope)
+      :ARG1-of (h / have-frequency-91
+            :ARG2 1
+            :mod (o / only)))
+
+# ::id lpp_1943.156 ::date 2012-07-31T11:56:31 ::annotator ISI-AMR-05 ::preferred
+# ::snt But he was in Turkish costume , and so nobody would believe what he said .
+# ::zh 但由于他所穿衣服的缘故，那时没有人相信他。
+# ::save-date Fri Apr 19, 2013 ::file lpp_1943_156.txt
+(c4 / contrast-01
+      :ARG2 (c / costume-01
+            :ARG1 (h / he)
+            :manner (c2 / country :wiki "Turkey"
+                  :name (n / name :op1 "Turkey"))
+            :ARG0-of (c3 / cause-01
+                  :ARG1 (b2 / believe-01
+                        :ARG0 (s / somebody :polarity -)
+                        :ARG1 (t / thing
+                              :ARG1-of (s2 / say-01
+                                    :ARG0 h))))))
+
+# ::id lpp_1943.160 ::date 2012-07-31T12:14:42 ::annotator ISI-AMR-05 ::preferred
+# ::snt And this time everybody accepted his report .
+# ::zh 这一次所有的人都同意他的看法。
+# ::save-date Sat Dec 29, 2012 ::file lpp_1943_160.txt
+(a / and
+  :op2 (a2 / accept-01
+         :ARG0 (e / everybody)
+         :ARG1 (t3 / thing
+                 :ARG1-of (r / report-01
+                            :ARG0 (h2 / he)))
+         :time (t / time
+                 :mod (t2 / this))))
+
+
+# ::id lpp_1943.162 ::date 2012-07-31T12:45:29 ::annotator ISI-AMR-05 ::preferred
+# ::snt WHen you tell them that you have made a new friend , they never ask you any questions about essential matters .
+# ::zh 当你对大人们讲起你的一个新朋友时，他们从来不向你提出实质性的问题。
+# ::save-date Fri Feb 5, 2016 ::file lpp_1943_162.txt
+(q2 / question-01 :polarity -
+      :ARG0 (t2 / they)
+      :ARG1 (m / matter
+            :mod (e / essential))
+      :ARG2 (y / you)
+      :time (t3 / tell-01
+            :ARG0 y
+            :ARG1 (m2 / make-01
+                  :ARG0 y
+                  :ARG1 (h / have-rel-role-91
+                        :ARG0 (p / person)
+                        :ARG1 y
+                        :ARG2 (f / friend)
+                        :ARG1-of (n / new-01)))
+            :ARG2 (t / they))
+      :time (e2 / ever)
+      :mod (a2 / any))
+
+# ::id lpp_1943.164 ::date 2012-07-31T12:52:25 ::annotator ISI-AMR-05 ::preferred
+# ::snt What games does he love best ?
+# ::zh 他喜爱什么样的游戏啊？
+# ::save-date Mon Dec 14, 2015 ::file lpp_1943_164.txt
+(l / love-01
+      :ARG0 (h / he)
+      :ARG1 (a2 / amr-unknown
+            :domain (g2 / game))
+      :degree (g / good
+            :degree (m / most)))
+
+# ::id lpp_1943.165 ::date 2012-07-31T12:53:52 ::annotator ISI-AMR-05 ::preferred
+# ::snt Does he collect butterflies ? "
+# ::zh 他是否收集蝴蝶标本呀？”
+# ::save-date Tue Jul 31, 2012 ::file lpp_1943_165.txt
+(c / collect-01
+      :ARG0 (h / he)
+      :ARG1 (b / butterfly)
+      :mode interrogative)
+

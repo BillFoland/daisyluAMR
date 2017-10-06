@@ -1,0 +1,26 @@
+# sentences and ids only, separated by blank lines, for samples from https://amr.isi.edu/download/amr-bank-struct-v1.6.txt: AMR release; corpus: lpp; section: test; number of AMRs: 143 (generated on Fri Mar 4, 2016 at 21:03:52)
+
+# ::id lpp_1943.148 ::date 2012-07-31T11:26:53 ::annotator ISI-AMR-05 ::preferred
+# ::snt But that did not really surprise me much .
+
+# ::id lpp_1943.150 ::date 2012-07-31T11:42:19 ::annotator ISI-AMR-05 ::preferred
+# ::snt When an astronomer discovers one of these he does not give it a name , but only a number .
+
+# ::id lpp_1943.153 ::date 2012-07-31T11:50:14 ::annotator ISI-AMR-05 ::preferred
+# ::snt This asteroid has only once been seen through the telescope .
+
+# ::id lpp_1943.156 ::date 2012-07-31T11:56:31 ::annotator ISI-AMR-05 ::preferred
+# ::snt But he was in Turkish costume , and so nobody would believe what he said .
+
+# ::id lpp_1943.160 ::date 2012-07-31T12:14:42 ::annotator ISI-AMR-05 ::preferred
+# ::snt And this time everybody accepted his report .
+
+# ::id lpp_1943.162 ::date 2012-07-31T12:45:29 ::annotator ISI-AMR-05 ::preferred
+# ::snt WHen you tell them that you have made a new friend , they never ask you any questions about essential matters .
+
+# ::id lpp_1943.164 ::date 2012-07-31T12:52:25 ::annotator ISI-AMR-05 ::preferred
+# ::snt What games does he love best ?
+
+# ::id lpp_1943.165 ::date 2012-07-31T12:53:52 ::annotator ISI-AMR-05 ::preferred
+# ::snt Does he collect butterflies ? "
+
