@@ -16,8 +16,23 @@ download wikification
 
 install tensorflow
 
+install smatch 
+
+modify system/daisylu_config.py to contain paths for your setup
+
+
 Test
 ----
+
+a set of files is provided, one with sentences and ids, the other with human generated AMR.
+
+cd system
+python daisylu_main.py
+
+should result in a smatch score of around 0.6519 
+
+sqlite, pandas, other python packages based on runtime errors
+
 
 
 
