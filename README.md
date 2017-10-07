@@ -5,6 +5,7 @@ Hold off until this is tested (10/6/17)
 Installation
 ---
 
+
 install git lfs (large file storage)
   follow instructions here
   after installation you should see something good for git lfs
@@ -14,7 +15,8 @@ check networks/models directory, if .weights files are not downloaded, issue
   
 download wikification
 
-install tensorflow
+install keras with tensorflow
+https://www.pyimagesearch.com/2016/11/14/installing-keras-with-tensorflow-backend/
 
 install smatch 
 
