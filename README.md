@@ -56,11 +56,14 @@ To run the parse test using defaults:
     cd system
     python daisylu_main.py
 
+install sqlite, pandas, or other missing python packages on your system based on runtime errors
+
 The system should run all five networks and create a file containing the AMR for each sentence, and then use smatch to compare parser output with golden output.  This should result in a smatch score of around 0.6519 
 
-sqlite, pandas, other python packages based on runtime errors
+Parse
+----
 
-to parse your sentences, first create a file with a format similar to the enclosed example and specify it on the command line with -i.  The golden file is specified with -g, and the output filename with -o.
+to parse your own sentences, first create a file with a format similar to the enclosed example and specify it on the command line with -i.  The golden file is specified with -g, and the output filename with -o.
 
     cd system
     python daisylu_main.py -i <sentenceFn> -o <outputFn> -g <goldenFn>
