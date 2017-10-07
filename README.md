@@ -1,39 +1,67 @@
 # daisyluAMR
 
-Hold off until this is tested (10/6/17)
-
 Installation
 ---
-
+Tested on macOS 10.12 (Sierra) and Linux 14.04 using Python 2.7.13 :: Anaconda 2.3.0.
+Before cloning this repository, 
 
 install git lfs (large file storage)
-  follow instructions here
-  after installation you should see something good for git lfs
+https://git-lfs.github.com/
 
-check networks/models directory, if .weights files are not downloaded, issue
-  git lfs fetch
-  
-download wikification
+Then clone.
+
+download Illinois wikifier
+https://cogcomp.org/page/software_view/Wikifier
 
 install keras with tensorflow
 https://www.pyimagesearch.com/2016/11/14/installing-keras-with-tensorflow-backend/
 
 install smatch 
+https://github.com/snowblink14/smatch
 
 modify system/daisylu_config.py to contain paths for your setup
+
+    # Modify these settings for your system (mac or linux or both)
+    if (platform.system() == 'Darwin'): #mac settings
+        # path to python 2.7 executable
+        paths['python']       = '/Users/bill_foland/anaconda/bin/python '  
+        # path to Illinois wikifier
+        paths['Wikifier2013'] = '/Users/bill_foland/Wikifier2013'
+        # command line to run smatch
+        paths['smatchCommand'] = 'python ../../smatch_2.0/smatch.py'
+    else: # linux settings
+        # path to python 2.7 executable
+        paths['python']       = 'python '   
+        # path to Illinois wikifier
+        paths['Wikifier2013'] = '/home/bill/Wikifier2013'
+        # command line to run smatch
+        paths['smatchCommand'] = 'python /home/bill/smatch_2.0/smatch.py'
+
 
 
 Test
 ----
 
-a set of files is provided, one with sentences and ids, the other with human generated AMR.
+A set of files is provided to check installation and to demonstrate the format for
+sentence files and golden (eg. human generated) AMRs used to check parser output.  These are very short excerpts from the Little Prince corpus from https://amr.isi.edu/download.html.
 
-cd system
-python daisylu_main.py
+To run the parse test using defaults:
 
-should result in a smatch score of around 0.6519 
+    cd system
+    python daisylu_main.py
+
+The system should run all five networks and create a file containing the AMR for each sentence, and then use smatch to compare parser output with golden output.  This should result in a smatch score of around 0.6519 
 
 sqlite, pandas, other python packages based on runtime errors
+
+to parse your sentences, first create a file with a format similar to the enclosed example and specify it on the command line with -i.  The golden file is specified with -g, and the output filename with -o.
+
+    cd system
+    python daisylu_main.py -i <sentenceFn> -o <outputFn> -g <goldenFn>
+
+
+
+
 
 
 
