@@ -1,5 +1,13 @@
 # daisyluAMR
 
+Source code to accompany the paper
+
+Abstract Meaning Representation Parsing using LSTM Recurrent Neural Networks
+
+by William Foland and James H. Martin.
+
+http://www.aclweb.org/anthology/P17-1043
+
 Installation
 ---
 Tested on macOS 10.12 (Sierra) and Linux 14.04 using Python 2.7.13 :: Anaconda 2.3.0.
