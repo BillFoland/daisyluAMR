@@ -1,10 +1,8 @@
 # daisyluAMR
 
-Source code to accompany the paper
+## Source code to accompany the paper:
 
-Abstract Meaning Representation Parsing using LSTM Recurrent Neural Networks
-
-by William Foland and James H. Martin.
+## Abstract Meaning Representation Parsing using LSTM Recurrent Neural Networks, by William Foland and James H. Martin.
 
 http://www.aclweb.org/anthology/P17-1043
 
