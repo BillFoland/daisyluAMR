@@ -343,6 +343,17 @@ def alignedInputDryrunFlow(amrSents, outFn,  sessionTag,
 
 
 
+def removeWikiAttrs(sents):
+    for i,sentence in enumerate(sents['test']):
+        G = sentence.singleComponentGraph['graph'] 
+        for lbl in G.nodes():    
+            for a in G.node[lbl]['attributes'].keys():
+                if (a == 'wiki'):
+                    print 'removing wiki', G.node[lbl]['attributes'][a]
+                    del G.node[lbl]['attributes'][a]
+    return sents
+
+
 if __name__ == '__main__':
 
     desc = """
@@ -361,7 +372,7 @@ if __name__ == '__main__':
     parser.add_argument('-nct','--noConceptThreshold', help='no Concept Threshold prob',        required=False, default=0.65, type=float)
     parser.add_argument('-sgt','--subGroupThreshold',  help='sub Group Threshold prob',         required=False, default=0.55, type=float)
 
-    parser.add_argument('-smatch2','--smatch2',         help='smatch2 conversion',              action='store_true', default=True )
+    parser.add_argument('-noWiki','--noWiki',          help='remove wiki references (LDC2014)', action='store_true', default=False )
     
     args = vars(parser.parse_args())
     pprint (args)
@@ -384,7 +395,7 @@ if __name__ == '__main__':
     outfile1 = args['outfile']
     outfile2 = 'corrected-' + outfile1
     sList={}
-      
+            
     sList['test'], _ = readAllAMR(args['infile'])
     sents = alignedInputDryrunFlow(sList, outfile1, 
                            args['tag'], 
@@ -399,6 +410,9 @@ if __name__ == '__main__':
     forceICorefs(sents)
     removeQuantHMMAttrs(sents)
     translateCountryCat(sents)
+
+    if args['noWiki']:
+        removeWikiAttrs(sents)   
 
     createOutputTextFile(sents, outfile2, modelInfo=modelInfoDict[args['modelString']], forceSubGroupConnectionThreshold=args['subGroupThreshold'] )
 
