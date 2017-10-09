@@ -8,7 +8,19 @@ http://www.aclweb.org/anthology/P17-1043
 
 Installation
 ---
-Tested on macOS 10.12 (Sierra) and Linux 14.04 using Python 2.7.13 :: Anaconda 2.3.0.
+Tested on 
+
+macOS 10.12 (Sierra) and Linux 14.04 using 
+
+Python 2.7.13 :: Anaconda 2.3.0.
+
+Tensorflow 1.0.1
+
+Keras 2.0.4
+
+networkx 1.10
+
+
 Before cloning this repository, 
 
 install git lfs (large file storage)
