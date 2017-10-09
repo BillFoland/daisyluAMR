@@ -20,8 +20,7 @@ Keras 2.0.4
 
 networkx 1.10
 
-
-##Before cloning this repository, 
+## Before cloning this repository, 
 
 install git lfs (large file storage)
 https://git-lfs.github.com/
