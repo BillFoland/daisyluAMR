@@ -81,7 +81,13 @@ to parse your own sentences, first create a file with a format similar to the en
 
 
 
+Example
+----
+DEFT2014T12 Results can be found using the -noWiki option,
+first merge all the the test files into "merged.txt" then run
 
+python daisylu_main.py -i merged.txt -o merged.amr -g merged.txt -noWiki
+result is  Document F-score: 0.6852
 
 
 
